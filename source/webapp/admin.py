@@ -5,9 +5,9 @@ from webapp.models import Task, Status, Type
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'summary', 'status', 'type', 'description']
+    list_display = ['id', 'summary', 'status', 'description']
     list_display_links = ['summary']
-    list_filter = ['summary', 'type']
+    list_filter = ['summary']
     search_fields = ['summary']
     fields = ['summary', 'status', 'type', 'description', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at']

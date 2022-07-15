@@ -36,9 +36,10 @@ class Create(View):
         if form.is_valid():
             summary = form.cleaned_data.get("summary")
             status = form.cleaned_data.get("status")
-            type = form.cleaned_data.get("type")
+            type = form.cleaned_data.pop("type")
             description = form.cleaned_data.get("description")
-            new_task = Task.objects.create(summary=summary, status=status, type=type, description=description)
+            new_task = Task.objects.create(summary=summary, status=status, description=description)
+            new_task.type.set(type)
             return redirect("view", pk=new_task.pk)
         return render("create.html", {"form": form})
 
