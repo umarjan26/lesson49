@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="#">Добавить задачу</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1 class="text-success">Задачи</h1>
+    <div class="row">
+        {% for task in Task %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card bg-warning ">
+                    <div class="card-body">
+                        <h5 class="card-title"><span class="fs-3">{{ task.summary }}</span></h5>
+                        <p>Статус: {{  task.status }}</p>
+                        <p>Тип: {{ task.type_task }}</p>
+                        <p class="bg-warning"><a href="{% url "view" task.pk %}"><img
+                                    src="https://ru.seaicons.com/wp-content/uploads/2015/10/Preview-icon2.png"
+                                    width="25"
+                                    height="25" alt="Просмотр"></a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
