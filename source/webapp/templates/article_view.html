@@ -5,10 +5,10 @@
         <a class="nav-link" href="{% url "add" %}">Новая задачи</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url "update" %}">Изменения задачи</a>
+        <a class="nav-link" href="{% url "update" tasks.pk  %}">Изменения задачи</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Удаления задачи</a>
+        <a class="nav-link" href="{% url "delete" tasks.pk  %}">Удаления задачи</a>
     </li>
 {% endblock %}
 {% block content %}
