@@ -12,16 +12,31 @@
     </li>
 {% endblock %}
 {% block content %}
-    <p>
-        {{ tasks.summary }}
+    <div class="card" style="width: 18rem;">
+    <p style="color:#FF0000">
+       описание:  {{ tasks.summary }}
     </p>
-    <p>
+    </div>
+     <div class="card" style="width: 18rem;">
+    <p style="color:#FF0000">
         {{ tasks.status }}
     </p>
-    <p>
+     </div>
+     <div class="card" style="width: 18rem;">
+    <p style="color:#FF0000">
         {{ tasks.description }}
     </p>
-    <p>
-        {{ tasks.type }}
-    </p>
+       </div>
+        <div class="card" style="width: 18rem;">
+    <p style="color:#FF0000">тип:</p>
+            </div>
+            <div class="card" style="width: 18rem;">
+    {% for types in tasks.type.all %}
+    <p style="color:#FF0000">
+        {{ types.name }}</p>
+               </div>
+    {% empty %}
+    <p style="color:#FF0000">такого типа нету</p>
+    {% endfor %}
+
 {% endblock %}
