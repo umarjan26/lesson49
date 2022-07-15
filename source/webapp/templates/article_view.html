@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Создание{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "add" %}">Новая задачи</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Изменения задачи</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Удаления задачи</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <p>
+        {{ tasks.summary }}
+    </p>
+    <p>
+        {{ tasks.status }}
+    </p>
+    <p>
+        {{ tasks.description }}
+    </p>
+    <p>
+        {{ tasks.type }}
+    </p>
+{% endblock %}
