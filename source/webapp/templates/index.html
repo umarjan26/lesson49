@@ -6,6 +6,7 @@
     </li>
 {% endblock %}
 {% block content %}
+    {% include "partial/search.html" %}
     <h1 class="text-black">Задачи</h1>
     <div class="row">
         {% for task in tasks %}

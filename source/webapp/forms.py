@@ -10,3 +10,7 @@ class TaskForm(forms.Form):
                                   widget=widgets.Textarea(attrs={"cols": 30, "rows": 2}))
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     type = forms.ModelMultipleChoiceField(queryset=Type.objects.all())
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=50, required=False, label="найти")

@@ -1,14 +1,14 @@
 <ul class="pagination mt-3">
     <li class="page-item">
-        <a class="page-link" href="?page=1">Начало</a>
+        <a class="page-link" href="?page=1 {% if query %}&{{ query }}{% endif %}">Начало</a>
     </li>
     {% if page_obj.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }} {% if query %}&{{ query }}{% endif %}">Previous</a>
         </li>
         <li class="page-item">
             <a class="page-link"
-               href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+               href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} {% if query %}&{{ query }}{% endif %}</a>
         </li>
     {% else %}
         <li class="page-item disabled">
@@ -27,10 +27,10 @@
     {% if page_obj.has_next %}
         <li class="page-item">
             <a class="page-link"
-               href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+               href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }} {% if query %}&{{ query }}{% endif %}</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="page-link" href="?page={{ page_obj.next_page_number }} {% if query %}&{{ query }}{% endif %}">Next</a>
         </li>
     {% else %}
         <li class="page-item disabled">
@@ -38,6 +38,6 @@
         </li>
     {% endif %}
     <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">В конец</a>
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }} {% if query %}&{{ query }}{% endif %}">В конец</a>
     </li>
 </ul>
