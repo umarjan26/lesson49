@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Создание{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "update" task.pk %}">Изменения задачи</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "delete" task.pk %}">Удаления задачи</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <p>
+      <span class="fw-bold">Наименования:</span> {{ task.summary }}
+    </p>
+    <p>
+     <span class="fw-bold">Cтатус:</span> {{ task.status }}
+    </p>
+    <p>
+     <span class="fw-bold">Описания:</span> {{ task.description }}
+    </p>
+    <p class="fw-bold">Типы:</p>
+    {% for type in task.type_task.all %}
+        <p>{{ type.name }}</p>
+    {% empty %}
+        <p>Типов нету</p>
+    {% endfor %}
+{% endblock %}
