@@ -1,6 +1,7 @@
 from django.db.models import Q
+from django.urls import reverse_lazy
 from django.utils.http import urlencode
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from webapp.forms import SearchForm, ProjectForm
 from webapp.models import Project
@@ -49,3 +50,15 @@ class CreateProject(CreateView):
 class ProjectView(DetailView):
     template_name = "projects/view.html"
     model = Project
+
+
+class UpdateProject(UpdateView):
+    form_class = ProjectForm
+    template_name = 'projects/update.html'
+    model = Project
+
+
+class DeleteProject(DeleteView):
+    model = Project
+    template_name = 'projects/delete.html'
+    success_url = reverse_lazy('index_list')
