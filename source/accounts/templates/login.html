@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}вход{% endblock %}
+{% block content %}
+    <h1>вход</h1>
+    <form action="{% url 'login' %}" method="post" class="text-center">
+        {% csrf_token %}
+        {% if has_error %}
+            <p class="text-danger">Неверное имя пользователя или пароль</p>
+        {% endif %}
+        <div class="form-group">
+            <label for="username" class="form-label"> имя пользователя:</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">пароль</label>
+            <input type="password" name="password" id="password">
+
+        </div>
+        <button type="submit">войти</button>
+    </form>
+{% endblock %}
