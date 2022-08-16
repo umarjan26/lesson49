@@ -28,8 +28,8 @@
                     <li class="nav-item">
             <a class="nav-link" href="{% url "logout"  %}">выйти</a>
         </li>
-                    {{ request }}
-            {{ user }}
+                    <p>здравствуйте: </p>
+            <p>{{ user }}</p>
                 {% else %}
                     <li class="nav-item">
             <a class="nav-link" href="{% url "login"  %}">войти</a>
