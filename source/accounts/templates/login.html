@@ -3,7 +3,7 @@
 {% block title %}вход{% endblock %}
 {% block content %}
     <h1>вход</h1>
-    <form action="{% url 'login' %}" method="post" class="text-center">
+    <form  method="post" class="text-center">
         {% csrf_token %}
         {% if has_error %}
             <p class="text-danger">Неверное имя пользователя или пароль</p>

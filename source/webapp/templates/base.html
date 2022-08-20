@@ -32,7 +32,10 @@
             <p>{{ user }}</p>
                 {% else %}
                     <li class="nav-item">
-            <a class="nav-link" href="{% url "login"  %}">войти</a>
+            <a class="nav-link" href="{% url "login"  %}?next={{ request.get_full_path }}">войти</a>
+        </li>
+                    <li class="nav-item">
+            <a class="nav-link" href="{% url "registration"  %}?next={{ request.get_full_path }}">регистрация</a>
         </li>
                 {% endif %}
 
