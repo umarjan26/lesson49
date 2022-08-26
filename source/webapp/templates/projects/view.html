@@ -5,6 +5,9 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url "add" project.pk %}">Новая задачи</a>
     </li>
+            <li class="nav-item">
+        <a class="nav-link" href="{% url "add_user" project.pk %}">Редактирование пользователей</a>
+    </li>
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -38,5 +41,9 @@
         </div>
     {% empty %}
         <p>Задач нету</p>
+    {% endfor %}
+    <h6 class="">пользователи</h6>
+    {% for user in project.user.all %}
+           <h5 class="card-title"><span class="fs-3"> {{ user.username }}</span></h5>
     {% endfor %}
 {% endblock %}

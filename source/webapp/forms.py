@@ -29,3 +29,10 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ['name', 'description', 'add_at', 'end_at']
 
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['user']
+        widgets = {'user': forms.CheckboxSelectMultiple()}
