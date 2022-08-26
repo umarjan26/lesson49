@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -46,12 +47,12 @@ class IndexView(ListView):
             return self.form.cleaned_data.get("search")
 
 
-class TaskView(DetailView):
+class TaskView(LoginRequiredMixin, DetailView):
     template_name = "tasks/task_view.html"
     model = Task
 
 
-class CreateTask(CreateView):
+class CreateTask(PermissionRequiredMixin, CreateView):
     form_class = TaskForm
     template_name = "tasks/create.html"
 
@@ -64,7 +65,15 @@ class CreateTask(CreateView):
         return reverse('view_project', kwargs={'pk': self.object.project.pk})
 
 
-class UpdateTask(UpdateView):
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return self.request.user in project.user.all() and \
+            'Project Manager' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Team Lead' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Developer' in self.request.user.groups.all().values_list('name', flat=True)
+
+class UpdateTask(PermissionRequiredMixin, UpdateView):
     form_class = TaskForm
     template_name = 'tasks/update.html'
     model = Task
@@ -73,7 +82,14 @@ class UpdateTask(UpdateView):
         return reverse('view', kwargs={'pk': self.object.pk})
 
 
-class DeleteTask(DeleteView):
+    def has_permission(self):
+        return self.request.user in self.get_object().project.user.all() and \
+            'Project Manager' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Team Lead' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Developer' in self.request.user.groups.all().values_list('name', flat=True)
+
+
+class DeleteTask(PermissionRequiredMixin, DeleteView):
     model = Task
 
     def get(self, request, *args, **kwargs):
@@ -81,3 +97,9 @@ class DeleteTask(DeleteView):
 
     def get_success_url(self):
         return reverse('view_project', kwargs={'pk': self.object.project.pk})
+
+
+    def has_permission(self):
+        return self.request.user in self.get_object().project.user.all() and \
+            'Project Manager' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Team Lead' in self.request.user.groups.all().values_list('name', flat=True)

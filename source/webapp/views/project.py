@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.http import urlencode
@@ -43,9 +43,13 @@ class ListProject(ListView):
             return self.form.cleaned_data.get("search")
 
 
-class CreateProject(LoginRequiredMixin, CreateView):
+class CreateProject(PermissionRequiredMixin, CreateView):
     form_class = ProjectForm
     template_name = "projects/create.html"
+
+
+    def has_permission(self):
+        return 'Project Manager' in self.request.user.groups.all().values_list('name', flat=True)
 
 
 class ProjectView(DetailView):
@@ -53,20 +57,32 @@ class ProjectView(DetailView):
     model = Project
 
 
-class UpdateProject(UpdateView):
+class UpdateProject(PermissionRequiredMixin, UpdateView):
     form_class = ProjectForm
     template_name = 'projects/update.html'
     model = Project
 
 
-class DeleteProject(DeleteView):
+    def has_permission(self):
+        return  'Project Manager' in self.request.user.groups.all().values_list('name', flat=True)
+
+
+class DeleteProject(PermissionRequiredMixin, DeleteView):
     model = Project
     template_name = 'projects/delete.html'
     success_url = reverse_lazy('index_list')
 
+    def has_permission(self):
+        return 'Project Manager' in self.request.user.groups.all().values_list('name', flat=True)
 
-class AddUser (UpdateView):
+
+class AddUser (PermissionRequiredMixin, UpdateView):
     model = Project
     form_class = UserForm
     template_name = 'projects/add_user.html'
 
+
+    def has_permission(self):
+        return self.request.user.is_superuser or self.request.user in self.get_object().user.all() and \
+            'Project Manager' in self.request.user.groups.all().values_list('name', flat=True) or \
+            'Team Lead' in self.request.user.groups.all().values_list('name', flat=True)
