@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 # Create your models here.
@@ -17,6 +18,7 @@ class Project(models.Model):
     description = models.TextField(max_length=200, null=True, blank=True, verbose_name="Описание")
     add_at = models.DateField(verbose_name="Дата начала")
     end_at = models.DateField(verbose_name="Дата окончания", null=True, blank=True)
+    user = models.ManyToManyField(get_user_model(), related_name="projects", blank=True, verbose_name="пользователь")
 
     def __str__(self):
         return f"{self.name}"
