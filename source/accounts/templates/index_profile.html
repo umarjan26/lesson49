@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Список Пользователей{% endblock %}
+{% block content %}
+    <h2 class="text-danger">Пользователи</h2>
+    {% if request.user.is_authenticated  %}
+        <ul class="navbar-nav">
+            {% for user in users %}
+                <li class="nav-item"><a href="{% url 'profile' user.pk %}">{{ user.username }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+{% endif %}
+{% endblock %}
+

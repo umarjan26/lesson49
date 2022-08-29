@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}профиль{% endblock %}
+{% block content %}
+<div class="mb-5">
+        <div class=" row-cols-1 row-cols-sm-2">
+
+                    <div class="col my-2">
+                        <div class="">
+                            <div class="card-body">
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" class="card-img-top w-25" alt="...">
+        {% endif %}
+        <div class="card-body ms-5">
+            <h5 class="card-title">Имя пользователя: {{ user.username }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Ссылка на Git {{ user.profile.giturl }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Имя: {{ user.first_name }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Фамилия: {{ user.last_name }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Почта: {{ user.email }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Описания: {{ user.profile.description }}</h6>
+        </div>
+    </div>
+                            </div>
+                        </div>
+                   {% include "partial/list_partial.html" %} </div>
+
+{% endblock %}

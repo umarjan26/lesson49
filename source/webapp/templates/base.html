@@ -24,12 +24,17 @@
                 {% block nav %}
                 {% endblock %}
 
-                {% if request.user.is_authenticated %}
+{% if request.user.is_authenticated %}
                     <li class="nav-item">
-            <a class="nav-link" href="{% url "logout"  %}">выйти</a>
-        </li>
-                    <p>здравствуйте: </p>
-            <p>{{ user }}</p>
+                        <a class="nav-link" href="{% url "logout" %}">Выйти</a>
+                    </li>
+                    <li class="nav-item">
+                        <p>Здравствуйте <a
+                                href="{% url 'profile' request.user.pk %}">{{ user.username }}</a></p></li>
+
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'list_profile' %}">Просмотр всех пользователей</a>
+                      </li>
                 {% else %}
                     <li class="nav-item">
             <a class="nav-link" href="{% url "login"  %}?next={{ request.get_full_path }}">войти</a>
