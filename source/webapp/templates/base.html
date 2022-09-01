@@ -28,7 +28,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url "logout" %}">Выйти</a>
                     </li>
+    <li class="nav-item">
+                        <a class="nav-link" href="{% url "change_profile"%}">редактировать профиль</a>
+                    </li>
+
+        <li class="nav-item">
+                       <a class="nav-link" href="{% url "change_password"%}">редактировать пароль</a>
+                    </li>
+
+
+                        <h6></h6>
+
                     <li class="nav-item">
+
+
+
                         <p>Здравствуйте <a
                                 href="{% url 'profile' request.user.pk %}">{{ user.username }}</a></p></li>
 

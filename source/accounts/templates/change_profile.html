@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}редактирование профиля{% endblock %}
+
+
+{% block content %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% include "partial/form.html" with fields_only=True   %}
+        {% include "partial/form.html" with form=profile_form button_text="редактировать" %}
+    </form>
+{% endblock %}
